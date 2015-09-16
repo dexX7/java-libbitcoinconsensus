@@ -4,7 +4,7 @@
     <groupId>co.bitwatch.libbitcoinconsensus</groupId>
     <artifactId>java-libbitcoinconsensus</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <name>java-libbitcoinconsensus</name>
     <description>JNA binding and Java wrapper for libbitcoinconsensus</description>
     <url>https://github.com/dexX7/java-libbitcoinconsensus</url>

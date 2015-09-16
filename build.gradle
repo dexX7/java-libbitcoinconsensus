@@ -1,7 +1,7 @@
 apply plugin: 'java'
 
 group = 'co.bitwatch.libbitcoinconsensus'
-version = '1.0-SNAPSHOT'
+version = '0.1-SNAPSHOT'
 
 description = 'JNA binding and Java wrapper for libbitcoinconsensus'
 
