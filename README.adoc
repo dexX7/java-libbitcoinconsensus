@@ -1,0 +1,36 @@
+= java-libbitcoinconsensus
+
+image:https://travis-ci.org/dexX7/java-libbitcoinconsensus.svg["Build Status", link="https://travis-ci.org/dexX7/java-libbitcoinconsensus"]
+
+A JNA binding and Java wrapper for https://github.com/bitcoin/bitcoin/blob/master/doc/shared-libraries.md#bitcoinconsensus[libbitcoinconsensus].
+
+
+== Setup
+
+    git clone https://github.com/dexX7/java-libbitcoinconsensus.git
+    cd java-libbitcoinconsensus/
+
+
+== Building
+
+Gradle:
+
+    ./gradlew build
+
+Maven:
+
+    mvn package
+
+
+== Testing
+
+Gradle:
+
+    ./gradlew test
+
+Maven:
+
+    mvn test
+
+
+NOTE: `libbitcoinconsensus` must be available in the class path or as system library.
