@@ -8,6 +8,26 @@
     <name>java-libbitcoinconsensus</name>
     <description>JNA binding and Java wrapper for libbitcoinconsensus</description>
     <url>https://github.com/dexX7/java-libbitcoinconsensus</url>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray</name>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray-plugins</name>
+            <url>https://jcenter.bintray.com</url>
+        </pluginRepository>
+    </pluginRepositories>
     <dependencies>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
