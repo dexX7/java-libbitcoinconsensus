@@ -6,7 +6,7 @@ version = '0.1-SNAPSHOT'
 description = 'JNA binding and Java wrapper for libbitcoinconsensus'
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
