@@ -13,8 +13,21 @@ repositories {
 dependencies {
     compile group: 'net.java.dev.jna', name: 'jna', version: '4.2.0'
 
-    testCompile "org.codehaus.groovy:groovy:2.4.4"
+    testCompile 'org.codehaus.groovy:groovy:2.4.4'
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude module: 'groovy-all'
+    }
+}
+
+test {
+    testLogging.showStandardStreams = true
+
+    beforeSuite { descriptor ->
+        if (descriptor.getClassName() != null) {
+            logger.lifecycle(descriptor.name)
+        }
+    }
+    beforeTest { descriptor ->
+        logger.lifecycle('    ' + descriptor.name)
     }
 }
