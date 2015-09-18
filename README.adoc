@@ -6,33 +6,18 @@ A https://github.com/java-native-access/jna[JNA] binding and Java wrapper for ht
 
 WARNING: This software is EXPERIMENTAL software. USE AT YOUR OWN RISK.
 
-
 == Setup
 
     git clone https://github.com/dexX7/java-libbitcoinconsensus.git
     cd java-libbitcoinconsensus/
 
-
 == Building
 
-Gradle:
-
     ./gradlew build
-
-Maven:
-
-    mvn package
 
 
 == Testing
 
-Gradle:
-
     ./gradlew test
-
-Maven:
-
-    mvn test
-
 
 NOTE: `libbitcoinconsensus` must be available in the class path or as system library.

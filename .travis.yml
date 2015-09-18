@@ -5,20 +5,16 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
+  - openjdk6
 
 env:
   global:
     - LIBBITCOIN_URL=http://bitwatch.co/uploads/lib/libbitcoinconsensus.so # hack!
     - LIBBITCOIN_HASH=27831e7eb06c13b2fb1a58ba1462272d1e97791eb282034a09e4ef95ae9b1954
 
-  matrix:
-    - USE_GRADLE=true
-    - USE_MAVEN=true
-
 cache:
   directories:
   - $HOME/.gradle/caches
-  - $HOME/.m2
 
 install:
   - mkdir -p src/main/resources # hack!
@@ -26,5 +22,4 @@ install:
   - echo "$LIBBITCOIN_HASH  src/main/resources/libbitcoinconsensus.so" | sha256sum -c
 
 script:
-  - if [ "$USE_GRADLE" = "true" ]; then ./gradlew clean test; fi
-  - if [ "$USE_MAVEN" = "true" ]; then mvn clean test; fi
+  - ./gradlew clean test
