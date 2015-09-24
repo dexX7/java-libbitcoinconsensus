@@ -6,10 +6,9 @@ import co.bitwatch.libbitcoinconsensus.exceptions.TxSizeMismatchException;
 import com.sun.jna.Native;
 import com.sun.jna.ptr.IntByReference;
 
-import static co.bitwatch.libbitcoinconsensus.LibBitcoinConsensus.bitcoinconsensus_ERR_DESERIALIZE;
-import static co.bitwatch.libbitcoinconsensus.LibBitcoinConsensus.bitcoinconsensus_ERR_TX_INDEX;
-import static co.bitwatch.libbitcoinconsensus.LibBitcoinConsensus.bitcoinconsensus_ERR_TX_SIZE_MISMATCH;
-import static co.bitwatch.libbitcoinconsensus.LibBitcoinConsensus.bitcoinconsensus_SCRIPT_FLAGS_VERIFY_NONE;
+import java.util.Set;
+
+import static co.bitwatch.libbitcoinconsensus.LibBitcoinConsensus.*;
 
 /**
  * Java wrapper for libbitcoinconsensus
@@ -38,6 +37,8 @@ public class BitcoinConsensus {
     /**
      * Evaluates a Bitcoin script.
      *
+     * Standard script verification flags are applied.
+     *
      * @param scriptPubKey The previous output script to be evaluated
      * @param txTo         The transaction with the input that is spending the previous output
      * @param nIn          The index of the input in txTo that spends the scriptPubKey
@@ -48,7 +49,7 @@ public class BitcoinConsensus {
      */
     public Boolean VerifyScript(byte[] scriptPubKey, byte[] txTo, int nIn)
             throws DeserializeException, TxSizeMismatchException, TxIndexOutOfBoundsException {
-        return VerifyScript(scriptPubKey, txTo, nIn, bitcoinconsensus_SCRIPT_FLAGS_VERIFY_NONE);
+        return VerifyScript(scriptPubKey, txTo, nIn, VerifyFlag.STANDARD_VERIFY_FLAGS);
     }
 
     /**
@@ -57,17 +58,17 @@ public class BitcoinConsensus {
      * @param scriptPubKey The previous output script to be evaluated
      * @param txTo         The transaction with the input that is spending the previous output
      * @param nIn          The index of the input in txTo that spends the scriptPubKey
-     * @param flags        The script validation flags
+     * @param flags        The script verification flags
      * @return True, if the script evaluated successfully, and false otherwise
      * @throws DeserializeException        Serialization failure
      * @throws TxSizeMismatchException     Mismatch of txToLen and the size of txTo
      * @throws TxIndexOutOfBoundsException Invalid transaction input index for txTo
      */
-    public Boolean VerifyScript(byte[] scriptPubKey, byte[] txTo, int nIn, int flags)
+    public Boolean VerifyScript(byte[] scriptPubKey, byte[] txTo, int nIn, Set<VerifyFlag> flags)
             throws DeserializeException, TxSizeMismatchException, TxIndexOutOfBoundsException {
         IntByReference err = new IntByReference();
         int result = nativeLib.bitcoinconsensus_verify_script(
-                scriptPubKey, scriptPubKey.length, txTo, txTo.length, nIn, flags, err);
+                scriptPubKey, scriptPubKey.length, txTo, txTo.length, nIn, VerifyFlag.getValueOf(flags), err);
 
         switch (err.getValue()) {
             case bitcoinconsensus_ERR_TX_INDEX:
