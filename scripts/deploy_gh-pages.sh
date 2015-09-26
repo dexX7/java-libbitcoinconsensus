@@ -3,6 +3,16 @@ set -e
 
 echo "Deploying JavaDoc to GitHub Pages.."
 
+if [ -z ${TRAVIS_BUILD_DIR+x} ]; then
+    echo "Skipping deployment, because TRAVIS_BUILD_DIR is not defined."
+    exit
+fi
+
+if [ -z ${GIT_REPO_URL+x} ]; then
+    echo "Skipping deployment, because GIT_REPO_URL is not defined."
+    exit
+fi
+
 # Commit hash of the main repository
 GIT_COMMIT=$(git rev-parse --short HEAD)
 
