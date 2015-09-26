@@ -46,8 +46,8 @@ public enum VerifyFlag {
     /**
      * Require S values are at most the curve order divided by 2.
      *
-     * Passing a non-strict-DER signature or one with S > order/2 to a checksig
-     * operation causes script failure.
+     * Passing a non-strict-DER signature or one with S greater than order/2 to a
+     * checksig operation causes script failure.
      *
      * (softfork safe, BIP62 rule 5)
      */
