@@ -23,3 +23,12 @@ install:
 
 script:
   - ./gradlew clean test
+
+deploy:
+  provider: script
+  script: scripts/deploy_gh-pages.sh
+  skip_cleanup: true
+  on:
+    branch: master
+    jdk: oraclejdk8
+    condition: "$TRAVIS_PULL_REQUEST != true"
