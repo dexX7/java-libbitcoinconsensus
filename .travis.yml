@@ -31,4 +31,3 @@ deploy:
   on:
     branch: master
     jdk: oraclejdk8
-    condition: "$TRAVIS_PULL_REQUEST != true"
