@@ -1,0 +1,7 @@
+= java-libbitcoinconsensus: scripts
+
+This directory contains scripts and helpers.
+
+== deploy_gh-pages.sh
+
+A script used by Travis CI to generate and deploy the http://dexx7.github.io/java-libbitcoinconsensus/[Javadoc] to https://github.com/dexX7/java-libbitcoinconsensus/tree/gh-pages/[GitHub Pages].

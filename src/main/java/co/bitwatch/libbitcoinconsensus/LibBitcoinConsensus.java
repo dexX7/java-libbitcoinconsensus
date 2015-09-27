@@ -6,7 +6,7 @@ import com.sun.jna.ptr.IntByReference;
 /**
  * JNA binding for libbitcoinconsensus
  *
- * @link https://github.com/bitcoin/bitcoin/blob/master/doc/shared-libraries.md
+ * @see <a href="https://github.com/bitcoin/bitcoin/blob/master/doc/shared-libraries.md">shared-libraries.md</a>
  */
 public interface LibBitcoinConsensus extends Library {
 
