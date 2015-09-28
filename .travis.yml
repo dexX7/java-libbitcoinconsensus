@@ -1,25 +1,41 @@
 sudo: false
 language: java
 
-jdk:
-  - oraclejdk8
-  - oraclejdk7
-  - openjdk7
-  - openjdk6
-
 env:
   global:
-    - LIBBITCOIN_URL=http://bitwatch.co/uploads/lib/libbitcoinconsensus.so # hack!
-    - LIBBITCOIN_HASH=27831e7eb06c13b2fb1a58ba1462272d1e97791eb282034a09e4ef95ae9b1954
+    - LIBBITCOIN_URL=https://s3.amazonaws.com/upload.bitwatch.co/java-libbitcoinconsensus
+    - LIBBITCOIN_HASH=a42e47f8bb1841ef78d1865905109b068d3500abac9274a4988f0e5d4ef7f167
+    - KEY_FINGERPRINT=f43718054c3e7c5cfb33e8257675e31cf5719832
+
+matrix:
+  fast_finish: true
+  include:
+    - os: osx
+    - os: linux
+      jdk: oraclejdk8
+      env: MAKE_DOCS=true
+    - os: linux
+      jdk: oraclejdk7
+    - os: linux
+      jdk: openjdk7
+    - os: linux
+      jdk: openjdk6
 
 cache:
   directories:
   - $HOME/.gradle/caches
 
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install gpg; fi
+
 install:
-  - mkdir -p src/main/resources # hack!
-  - wget $LIBBITCOIN_URL --output-document=src/main/resources/libbitcoinconsensus.so
-  - echo "$LIBBITCOIN_HASH  src/main/resources/libbitcoinconsensus.so" | sha256sum -c
+  - wget $LIBBITCOIN_URL/libbitcoinconsensus_0.11.tar.gz.asc
+  - wget $LIBBITCOIN_URL/libbitcoinconsensus_0.11.tar.gz
+  - echo "$LIBBITCOIN_HASH  libbitcoinconsensus_0.11.tar.gz" | shasum --algorithm 256 --check
+  - gpg --keyserver pgp.mit.edu --recv-keys $KEY_FINGERPRINT
+  - gpg --verify libbitcoinconsensus_0.11.tar.gz.asc
+  - mkdir -p src/main/resources
+  - tar -C src/main/resources -zxvf libbitcoinconsensus_0.11.tar.gz
 
 script:
   - ./gradlew clean test
@@ -30,5 +46,4 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-    jdk: oraclejdk8
-    condition: "$TRAVIS_PULL_REQUEST != true"
+    condition: $MAKE_DOCS = true
