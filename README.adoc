@@ -23,3 +23,10 @@ WARNING: This software is EXPERIMENTAL software. USE AT YOUR OWN RISK.
     ./gradlew test
 
 NOTE: `libbitcoinconsensus` must be available in the class path or as system library.
+
+== Platform Notes
+
+=== Mac OS X
+
+On Mac OS X you can put `libbitcoinconsensus.dylib` in `src/main/resources/`.
+
